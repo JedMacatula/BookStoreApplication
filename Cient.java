@@ -74,11 +74,11 @@ public class Cient extends Application
                 {
                     authorString = authorNameTextField.getText();
                     root.getChildren().removeAll(authorSearchText, authorNameTextField);
-                    try 
+                    try
                     {
-                        toServer.writeChars(authorString);
-                    } 
-                    catch (IOException ex) 
+                        toServer.writeUTF(authorString);
+                    }
+                    catch(IOException ex)
                     {
                         ex.printStackTrace();
                     }

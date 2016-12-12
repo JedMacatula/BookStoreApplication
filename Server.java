@@ -5,25 +5,27 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import javafx.scene.layout.Pane;
 import javafx.scene.Scene;
+import javafx.scene.control.TextArea;
 
 public class Server extends Application
 {
     Pane myPane = new Pane();
+    TextArea serverTextArea = new TextArea();
     String myAuthor;
     DataInputStream fromClient;
     DataOutputStream toClient;
+    String something;
     
     @Override
     public void start(Stage primaryStage)
     {
-        Scene myScene = new Scene(myPane, 500, 500);
+        myPane.getChildren().add(serverTextArea);
+        Scene myScene = new Scene(myPane, 480, 190);
         primaryStage.setTitle("Server");
         primaryStage.setScene(myScene);
         primaryStage.show();
@@ -56,20 +58,14 @@ public class Server extends Application
 
                     while (true) 
                     {
+                        something = fromClient.readUTF();
+                        
                         Platform.runLater(new Runnable() 
                         {
                             @Override
                             public void run() 
                             {
-                                try 
-                                {
-                                    myAuthor = fromClient.readUTF();
-                                    System.out.println(myAuthor);
-                                } 
-                                catch (IOException ex) 
-                                {
-                                    ex.printStackTrace();
-                                }
+                                serverTextArea.appendText("Name of Author: " + something + '\n');
                             }
                         });
                     }
