@@ -76,7 +76,7 @@ public class Cient extends Application
                     root.getChildren().removeAll(authorSearchText, authorNameTextField);
                     try
                     {
-                        toServer.writeUTF(authorString);
+                        toServer.writeUTF("select book from library where authorNames = '" + authorString + "';");
                     }
                     catch(IOException ex)
                     {
@@ -97,6 +97,14 @@ public class Cient extends Application
                 {
                     bookString = bookNameTextField.getText();
                     root.getChildren().removeAll(bookSearchText, bookNameTextField);
+                    try
+                    {
+                        toServer.writeUTF("select book from library where bookNames = '" + bookString + "';");
+                    }
+                    catch (IOException ex)
+                    {
+                        ex.printStackTrace();
+                    }
                 }
             }
         });

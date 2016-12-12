@@ -19,13 +19,13 @@ public class Server extends Application
     String myAuthor;
     DataInputStream fromClient;
     DataOutputStream toClient;
-    String something;
+    String sqlCommad;
     
     @Override
     public void start(Stage primaryStage)
     {
         myPane.getChildren().add(serverTextArea);
-        Scene myScene = new Scene(myPane, 480, 190);
+        Scene myScene = new Scene(myPane, 465, 170);
         primaryStage.setTitle("Server");
         primaryStage.setScene(myScene);
         primaryStage.show();
@@ -58,14 +58,15 @@ public class Server extends Application
 
                     while (true) 
                     {
-                        something = fromClient.readUTF();
+                        sqlCommad = fromClient.readUTF();
                         
                         Platform.runLater(new Runnable() 
                         {
                             @Override
                             public void run() 
                             {
-                                serverTextArea.appendText("Name of Author: " + something + '\n');
+                                serverTextArea.appendText(sqlCommad + '\n');
+                                serverTextArea.appendText("Printing Search Results to Client..." + '\n');
                             }
                         });
                     }
