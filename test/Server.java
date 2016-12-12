@@ -59,7 +59,6 @@ public class Server extends Application
                         
                         area = radius * radius * Math.PI;
                         
-
                         // Send area back to the client
                         outputToClient.writeDouble(area);
 
